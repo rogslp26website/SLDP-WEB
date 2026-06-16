@@ -1,0 +1,2 @@
+# Ignore local gallery folder so deploy stays small; gallery images are served from Supabase Storage
+docs and photos
