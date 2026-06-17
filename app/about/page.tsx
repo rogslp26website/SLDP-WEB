@@ -10,6 +10,7 @@ import {
 } from "@/lib/homeContent";
 import { PageHero, PageSection } from "@/components/PageSection";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 
 export default function AboutPage() {
   return (
@@ -99,8 +100,9 @@ export default function AboutPage() {
         </ul>
       </PageSection>
 
-      <section className="py-16 px-6 bg-brand-motif">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative overflow-hidden py-16 px-6 bg-brand-motif">
+        <BrandMotif />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <Reveal>
             <Link
               href="/"

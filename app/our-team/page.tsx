@@ -1,5 +1,6 @@
 import { PageHero, PageSection } from "@/components/PageSection";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 
 const EXPLAINER =
   "The River of God Student Leadership Development Program (ROGSLDP) is stewarded by a multidisciplinary team of pastors, educators, professionals, and volunteers united by a shared calling to raise values-driven student leaders.";
@@ -63,8 +64,9 @@ export default function OurTeamPage() {
         </div>
       </PageSection>
 
-      <section className="py-16 px-6 bg-brand-motif">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative overflow-hidden py-16 px-6 bg-brand-motif">
+        <BrandMotif />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <Reveal>
             <a
               href="/"

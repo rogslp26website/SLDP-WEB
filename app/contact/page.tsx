@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 
 const ROLE_OPTIONS = [
   "Student Leader",
@@ -62,8 +63,9 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="w-full bg-brand-motif min-h-[60vh]">
-      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+    <section className="relative overflow-hidden w-full bg-brand-motif min-h-[60vh]">
+      <BrandMotif />
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-16 md:py-24">
       <Reveal>
         <h1 className="text-3xl font-bold text-teal-blue mb-2">Contact Us</h1>
         <p className="text-gray-600 mb-4">Interested in joining RoG SLDP?</p>

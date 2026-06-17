@@ -11,6 +11,7 @@ import {
 import { stats } from "@/lib/stats";
 import Reveal from "@/components/motion/Reveal";
 import CountUp from "@/components/motion/CountUp";
+import BrandMotif from "@/components/BrandMotif";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   AcademicCapIcon,
@@ -23,8 +24,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function StatsSection() {
   return (
-    <section className="section-fullscreen py-16 md:py-20 px-6 bg-brand-motif">
-      <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
+    <section className="section-fullscreen relative overflow-hidden py-16 md:py-20 px-6 bg-brand-motif">
+      <BrandMotif />
+      <div className="relative z-10 max-w-6xl mx-auto space-y-6 md:space-y-8">
         {stats.map((stat, index) => {
           const Icon = iconMap[stat.icon];
           const isLeft = index % 2 === 0;

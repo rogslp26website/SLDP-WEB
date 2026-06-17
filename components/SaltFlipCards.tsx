@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { saltPillars } from "@/lib/homeContent";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 
 const MOBILE_FLIP_INTERVAL_SEC = 10;
 
@@ -24,8 +25,9 @@ export default function SaltFlipCards() {
   }, [isMobile]);
 
   return (
-    <section className="py-16 md:py-20 px-6 bg-brand-motif">
-      <div className="max-w-5xl mx-auto">
+    <section className="relative overflow-hidden py-16 md:py-20 px-6 bg-brand-motif">
+      <BrandMotif />
+      <div className="relative z-10 max-w-5xl mx-auto">
         <Reveal>
           <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-10 text-center">
             The SALT Framework (Core Pillars)

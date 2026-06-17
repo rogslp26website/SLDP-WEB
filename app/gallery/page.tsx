@@ -4,6 +4,7 @@ import GalleryGrid from "@/components/GalleryGrid";
 import GalleryPageClient from "./GalleryPageClient";
 import { PageHero } from "@/components/PageSection";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 
 export const dynamic = "force-dynamic";
 
@@ -19,15 +20,16 @@ export default async function GalleryPage() {
           Moments from the Prefect Summit and RoG SLDP programme.
         </p>
       </PageHero>
-      <section className="w-full bg-brand-motif">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-        <Reveal>
-          {list.length > 0 ? (
-            <GalleryGrid images={list} />
-          ) : (
-            <GalleryPageClient />
-          )}
-        </Reveal>
+      <section className="relative overflow-hidden w-full bg-brand-motif">
+        <BrandMotif />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+          <Reveal>
+            {list.length > 0 ? (
+              <GalleryGrid images={list} />
+            ) : (
+              <GalleryPageClient />
+            )}
+          </Reveal>
         </div>
       </section>
     </div>

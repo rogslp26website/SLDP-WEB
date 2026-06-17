@@ -41,6 +41,17 @@ html {
   background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
 }
 
+/* African-inspired motif layer — sits ON TOP of the dot pattern, BELOW content.
+   Tile = 140px (larger than the 28px dot grid to avoid moiré). */
+.brand-motif-layer {
+  top: -20%;
+  height: 140%;
+  background-repeat: repeat;
+  background-size: 140px 140px;
+  will-change: transform;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%2342889A'%3E%3Cpath d='M0 35 L35 10 L70 35 L105 10 L140 35'/%3E%3Cpath d='M0 130 L35 105 L70 130 L105 105 L140 130'/%3E%3Cpath d='M70 55 L85 70 L70 85 L55 70 Z'/%3E%3C/g%3E%3Cg stroke='%2376BC43'%3E%3Cpath d='M0 70 L35 95 L70 70 L105 95 L140 70'/%3E%3Cpath d='M0 25 L20 25 M40 25 L60 25 M80 25 L100 25 M120 25 L140 25'/%3E%3Cpath d='M20 115 L35 130 L20 145 M120 115 L105 130 L120 145'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
 @layer base {
   body {
     @apply font-sans antialiased;
@@ -58,5 +69,8 @@ html {
   }
   .kenburns {
     animation: none !important;
+  }
+  .brand-motif-layer {
+    transform: none !important;
   }
 }

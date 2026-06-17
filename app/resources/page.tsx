@@ -1,6 +1,7 @@
 import { resources } from "@/lib/resources";
 import ResourceCard from "@/components/ResourceCard";
 import Reveal from "@/components/motion/Reveal";
+import BrandMotif from "@/components/BrandMotif";
 import { PageHero } from "@/components/PageSection";
 
 export default function ResourcesPage() {
@@ -12,15 +13,16 @@ export default function ResourcesPage() {
           Programme materials and documents available for download.
         </p>
       </PageHero>
-      <section className="w-full bg-brand-motif">
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {resources.map((item, i) => (
-            <Reveal key={item.id} delay={(i % 6) * 0.06}>
-              <ResourceCard item={item} />
-            </Reveal>
-          ))}
-        </div>
+      <section className="relative overflow-hidden w-full bg-brand-motif">
+        <BrandMotif />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-16 md:py-24">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resources.map((item, i) => (
+              <Reveal key={item.id} delay={(i % 6) * 0.06}>
+                <ResourceCard item={item} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
     </div>
