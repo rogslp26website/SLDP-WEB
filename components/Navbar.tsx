@@ -176,7 +176,7 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden md:flex flex-1 min-w-0 items-center justify-end gap-2">
-            {user ? (
+            {user && (
               <>
                 {(isAdmin || isFacilitator) && (
                   <Link
@@ -210,13 +210,6 @@ export default function Navbar() {
                   Sign out
                 </button>
               </>
-            ) : (
-              <Link
-                href="/sign-in"
-                className="inline-flex items-center justify-center px-5 py-2 rounded-lg text-sm font-semibold bg-lime-green text-white hover:opacity-90 transition-all duration-300"
-              >
-                Sign up / Sign in
-              </Link>
             )}
           </div>
 
@@ -267,45 +260,35 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <div className="px-6 pb-8 space-y-3 border-t border-white/20 pt-6">
-              {user ? (
-                <>
-                  {(isAdmin || isFacilitator) && (
-                    <Link
-                      href="/dashboard"
-                      onClick={closeMobile}
-                      className="block w-full px-4 py-3 rounded-lg text-center text-white font-medium border border-white/30"
-                    >
-                      Dashboard
-                    </Link>
-                  )}
-                  {isParticipant && (
-                    <Link
-                      href="/portal"
-                      onClick={closeMobile}
-                      className="block w-full px-4 py-3 rounded-lg text-center text-white font-medium border border-white/30"
-                    >
-                      Portal
-                    </Link>
-                  )}
-                  <button
-                    type="button"
-                    onClick={handleSignOut}
-                    className="block w-full px-4 py-3 rounded-lg text-sm font-semibold bg-lime-green text-white text-center"
+            {user && (
+              <div className="px-6 pb-8 space-y-3 border-t border-white/20 pt-6">
+                {(isAdmin || isFacilitator) && (
+                  <Link
+                    href="/dashboard"
+                    onClick={closeMobile}
+                    className="block w-full px-4 py-3 rounded-lg text-center text-white font-medium border border-white/30"
                   >
-                    Sign out
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/sign-in"
-                  onClick={closeMobile}
+                    Dashboard
+                  </Link>
+                )}
+                {isParticipant && (
+                  <Link
+                    href="/portal"
+                    onClick={closeMobile}
+                    className="block w-full px-4 py-3 rounded-lg text-center text-white font-medium border border-white/30"
+                  >
+                    Portal
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  onClick={handleSignOut}
                   className="block w-full px-4 py-3 rounded-lg text-sm font-semibold bg-lime-green text-white text-center"
                 >
-                  Sign up / Sign in
-                </Link>
-              )}
-            </div>
+                  Sign out
+                </button>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

@@ -101,7 +101,9 @@ export default function Footer() {
           <p className="text-[10px] text-white/60 mt-1">
             Built by{" "}
             <a
-              href="mailto:kimanthileone@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=kimanthileone@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-lime-green hover:underline"
             >
               Liber Afrique
