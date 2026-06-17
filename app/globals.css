@@ -41,15 +41,15 @@ html {
   background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* African-inspired motif layer — sits ON TOP of the dot pattern, BELOW content.
-   Tile = 140px (larger than the 28px dot grid to avoid moiré). */
+/* African-inspired motif layer — mudcloth zigzags, kente steps, diamond lattice.
+   Tile = 160px (larger than the 28px dot grid to avoid moiré). */
 .brand-motif-layer {
   top: -20%;
   height: 140%;
   background-repeat: repeat;
-  background-size: 140px 140px;
+  background-size: 160px 160px;
   will-change: transform;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%2342889A'%3E%3Cpath d='M0 35 L35 10 L70 35 L105 10 L140 35'/%3E%3Cpath d='M0 130 L35 105 L70 130 L105 105 L140 130'/%3E%3Cpath d='M70 55 L85 70 L70 85 L55 70 Z'/%3E%3C/g%3E%3Cg stroke='%2376BC43'%3E%3Cpath d='M0 70 L35 95 L70 70 L105 95 L140 70'/%3E%3Cpath d='M0 25 L20 25 M40 25 L60 25 M80 25 L100 25 M120 25 L140 25'/%3E%3Cpath d='M20 115 L35 130 L20 145 M120 115 L105 130 L120 145'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'160'%20height%3D'160'%20viewBox%3D'0%200%20160%20160'%3E%3Cg%20fill%3D'none'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cg%20stroke%3D'%2342889A'%20stroke-width%3D'1.15'%3E%3Cpath%20d%3D'M0%2018%20L20%206%20L40%2018%20L60%206%20L80%2018%20L100%206%20L120%2018%20L140%206%20L160%2018'%2F%3E%3Cpath%20d%3D'M0%20142%20L20%20154%20L40%20142%20L60%20154%20L80%20142%20L100%20154%20L120%20142%20L140%20154%20L160%20142'%2F%3E%3Cpath%20d%3D'M40%2048%20L56%2064%20L40%2080%20L24%2064%20Z'%2F%3E%3Cpath%20d%3D'M120%2048%20L136%2064%20L120%2080%20L104%2064%20Z'%2F%3E%3Cpath%20d%3D'M80%2080%20L96%2096%20L80%20112%20L64%2096%20Z'%2F%3E%3Cpath%20d%3D'M40%2080%20L56%2096%20L40%20112%20L24%2096%20Z'%2F%3E%3Cpath%20d%3D'M120%2080%20L136%2096%20L120%20112%20L104%2096%20Z'%2F%3E%3Cpath%20d%3D'M80%2018%20V48%20M80%20112%20V142'%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D'%2376BC43'%20stroke-width%3D'1.1'%3E%3Cpath%20d%3D'M0%2064%20H18%20V52%20H36%20V64%20H54%20V52%20H72%20V64%20H90%20V52%20H108%20V64%20H126%20V52%20H144%20V64%20H160'%2F%3E%3Cpath%20d%3D'M0%2096%20H18%20V108%20H36%20V96%20H54%20V108%20H72%20V96%20H90%20V108%20H108%20V96%20H126%20V108%20H144%20V96%20H160'%2F%3E%3Cpath%20d%3D'M80%2064%20V96%20M64%2080%20H96'%2F%3E%3Cpath%20d%3D'M12%2036%20L20%2044%20L12%2052'%2F%3E%3Cpath%20d%3D'M148%2036%20L140%2044%20L148%2052'%2F%3E%3Cpath%20d%3D'M12%20108%20L20%20116%20L12%20124'%2F%3E%3Cpath%20d%3D'M148%20108%20L140%20116%20L148%20124'%2F%3E%3Ccircle%20cx%3D'80'%20cy%3D'32'%20r%3D'1.5'%2F%3E%3Ccircle%20cx%3D'56'%20cy%3D'64'%20r%3D'1.2'%2F%3E%3Ccircle%20cx%3D'104'%20cy%3D'64'%20r%3D'1.2'%2F%3E%3Ccircle%20cx%3D'80'%20cy%3D'128'%20r%3D'1.5'%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
 @layer base {

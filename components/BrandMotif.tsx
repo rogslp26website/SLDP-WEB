@@ -14,7 +14,7 @@ import { useEffect, useRef } from "react";
  *   </section>
  */
 export default function BrandMotif({
-  opacity = 0.09,
+  opacity = 0.12,
   speed = 0.15,
 }: {
   opacity?: number;
