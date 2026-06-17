@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+﻿import Image from "next/image";
 import {
   homeIntroTitle,
   homeIntro,
@@ -13,7 +12,6 @@ import MotionButton from "@/components/motion/MotionButton";
 export default function HomeAboutSection() {
   return (
     <>
-      {/* Intro – original centered layout */}
       <section className="py-16 md:py-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <Reveal>
@@ -27,13 +25,12 @@ export default function HomeAboutSection() {
         </div>
       </section>
 
-      {/* Media split – below intro text */}
       <section className="pb-16 md:pb-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <Reveal delay={0.1}>
             <div className="relative aspect-[16/9] rounded-xl overflow-hidden shadow-lg max-w-3xl mx-auto">
               <Image
-                src="/hero/slide2.jpg"
+                src="/hero/primary.jpg"
                 alt=""
                 fill
                 className="object-cover"
@@ -45,19 +42,26 @@ export default function HomeAboutSection() {
       </section>
 
       <MissionVisionWithStats />
-
       <SaltFlipCards />
 
-      {/* Expected Outcomes */}
-      <section className="py-16 md:py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <section className="relative py-16 md:py-20 px-6 overflow-hidden">
+        <Image
+          src="/hero/primary.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/45" aria-hidden />
+
+        <div className="relative z-10 max-w-4xl mx-auto space-y-8">
           <Reveal>
-            <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-6 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center">
               Expected Outcomes for Students
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+            <ul className="list-disc list-inside space-y-2 text-white/95 leading-relaxed">
               {expectedOutcomes.map((outcome, i) => (
                 <li key={i}>{outcome}</li>
               ))}

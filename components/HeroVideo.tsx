@@ -1,8 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -16,7 +15,6 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-// TODO: drop hero.mp4 into /public
 const ROTATING = ["Leaders", "Servants", "Changemakers", "Visionaries"];
 
 function HeroImageCarousel() {
@@ -71,7 +69,6 @@ export default function HeroVideo() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background media */}
       {showVideo ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -88,10 +85,8 @@ export default function HeroVideo() {
         <HeroImageCarousel />
       )}
 
-      {/* Neutral dark scrim */}
       <div className="absolute inset-0 bg-black/55 z-[1]" aria-hidden />
 
-      {/* Content */}
       <div
         className={`absolute inset-0 z-10 flex flex-col justify-center px-6 md:px-12 lg:px-16 max-w-7xl mx-auto ${montserrat.className}`}
       >
