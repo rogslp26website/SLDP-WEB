@@ -9,6 +9,8 @@ interface MotionButtonProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  /** When true, hover only scales — no vertical shift */
+  growOnly?: boolean;
 }
 
 export default function MotionButton({
@@ -16,6 +18,7 @@ export default function MotionButton({
   children,
   className = "",
   onClick,
+  growOnly = false,
 }: MotionButtonProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +32,8 @@ export default function MotionButton({
 
   return (
     <motion.div
-      whileHover={{ y: -2, scale: 1.02 }}
+      className="inline-block"
+      whileHover={growOnly ? { scale: 1.05 } : { y: -2, scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
     >
