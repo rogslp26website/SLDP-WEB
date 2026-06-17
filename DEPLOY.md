@@ -19,7 +19,7 @@ The `docs and photos` folder is **ignored** on deploy (`.vercelignore`). Gallery
 
 **One-time setup:**
 
-1. In [Supabase Dashboard](https://supabase.com/dashboard) → **Storage** → create a **public** bucket named `gallery`.
+1. In [Supabase Dashboard](https://supabase.com/dashboard) → **Storage** → create a **public** bucket named `Gallery` (case-sensitive).
 2. Upload your images there, **or** run the script from project root:
    ```powershell
    node scripts/upload-gallery-to-storage.js

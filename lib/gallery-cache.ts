@@ -8,20 +8,23 @@ import { listFromStorage, type GalleryImageItem } from "@/lib/gallery-source";
 
 const CACHE_KEY = ["gallery-list"];
 const CACHE_TAG = "gallery-list";
-const REVALIDATE_SECONDS = 60;
+/** Cache manifest 5 min — listing paths is cheap once cached; revalidate on admin upload/delete. */
+const REVALIDATE_SECONDS = 300;
 
 async function fetchGalleryList(): Promise<GalleryImageItem[] | null> {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn("[gallery] Missing Supabase env for Storage listing");
     return null;
   }
   try {
     return listFromStorage(() => Promise.resolve(createServiceClient()));
-  } catch {
+  } catch (err) {
+    console.error("[gallery] fetchGalleryList failed:", err);
     return null;
   }
 }
 
-/** Cached gallery list (revalidates every 60s or when tag is revalidated). */
+/** Cached gallery manifest (paths + CDN URLs). Revalidates every 5 min or when tag is revalidated. */
 export async function getCachedGalleryList(): Promise<GalleryImageItem[] | null> {
   return unstable_cache(fetchGalleryList, CACHE_KEY, {
     revalidate: REVALIDATE_SECONDS,

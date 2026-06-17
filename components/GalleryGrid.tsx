@@ -1,37 +1,76 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { X } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import type { GalleryImageItem } from "@/lib/gallery-source";
 
-export interface GalleryImageItem {
-  id: string;
-  path: string;
-  alt: string;
-  url?: string;
-}
-
-const PAGE_SIZE = 24;
 const THUMB_WIDTH = 400;
 
 function imageSrc(item: GalleryImageItem, thumb = false): string {
+  if (thumb && item.thumbUrl) return item.thumbUrl;
+  if (!thumb && item.url) return item.url;
   const base = `/api/gallery/image?path=${encodeURIComponent(item.path)}`;
   if (thumb) return `${base}&w=${THUMB_WIDTH}`;
-  return item.url ?? base;
+  return base;
 }
 
-export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) {
-  const [shownCount, setShownCount] = useState(PAGE_SIZE);
+interface GalleryGridProps {
+  /** Pre-hydrated first page from the server (avoids duplicate full list fetch). */
+  initialImages?: GalleryImageItem[];
+  total?: number;
+  initialHasMore?: boolean;
+  pageSize?: number;
+  /** Legacy: full list passed at once (e.g. admin). */
+  images?: GalleryImageItem[];
+}
+
+export default function GalleryGrid({
+  initialImages,
+  total: totalProp,
+  initialHasMore = false,
+  pageSize = 24,
+  images: imagesProp,
+}: GalleryGridProps) {
+  const legacySlice = imagesProp?.slice(0, pageSize);
+  const [images, setImages] = useState<GalleryImageItem[]>(
+    initialImages ?? legacySlice ?? []
+  );
+  const [total, setTotal] = useState(
+    totalProp ?? imagesProp?.length ?? initialImages?.length ?? 0
+  );
+  const [hasMore, setHasMore] = useState(
+    initialHasMore ??
+      (imagesProp ? imagesProp.length > pageSize : false)
+  );
+  const [loadingMore, setLoadingMore] = useState(false);
   const [lightboxPath, setLightboxPath] = useState<string | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  const visible = images.slice(0, shownCount);
-  const hasMore = shownCount < images.length;
+  const loadMore = useCallback(async () => {
+    if (loadingMore || !hasMore) return;
+    setLoadingMore(true);
+    try {
+      const res = await fetch(
+        `/api/gallery/list?offset=${images.length}&limit=${pageSize}`
+      );
+      if (!res.ok) throw new Error("Failed to load more");
+      const data = await res.json();
+      const next = (data.images ?? []) as GalleryImageItem[];
+      setImages((prev) => [...prev, ...next]);
+      setTotal(data.total ?? total);
+      setHasMore(!!data.hasMore);
+    } catch {
+      /* keep existing images visible */
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [hasMore, images.length, loadingMore, pageSize, total]);
 
   if (images.length === 0) {
     return (
       <p className="text-gray-600 text-center py-12">
-        No gallery images found. Add photos to the docs and photos folder.
+        No gallery images found. Add photos to the Gallery bucket or docs and photos folder.
       </p>
     );
   }
@@ -48,7 +87,7 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-        {visible.map((img) => (
+        {images.map((img) => (
           <motion.button
             key={img.id + img.path}
             type="button"
@@ -75,10 +114,11 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
         <div className="mt-10 flex justify-center">
           <button
             type="button"
-            onClick={() => setShownCount((c) => Math.min(c + PAGE_SIZE, images.length))}
-            className="px-6 py-3 rounded-lg font-semibold bg-teal-blue text-white hover:bg-teal-blue/90 transition-colors"
+            onClick={loadMore}
+            disabled={loadingMore}
+            className="px-6 py-3 rounded-lg font-semibold bg-teal-blue text-white hover:bg-teal-blue/90 transition-colors disabled:opacity-60"
           >
-            Load more
+            {loadingMore ? "Loading…" : `Load more (${images.length} of ${total})`}
           </button>
         </div>
       )}
@@ -117,6 +157,8 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
                 src={lightboxSrc}
                 alt="Prefect Summit 2025"
                 className="w-full h-full object-contain"
+                loading="eager"
+                decoding="async"
               />
             </motion.div>
           </motion.div>
@@ -125,3 +167,5 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
     </>
   );
 }
+
+export type { GalleryImageItem };

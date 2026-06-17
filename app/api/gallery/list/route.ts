@@ -1,9 +1,10 @@
 export const dynamic = "force-dynamic";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import { getCachedGalleryList } from "@/lib/gallery-cache";
+import { paginateGalleryImages } from "@/lib/gallery-source";
 
 const GALLERY_ROOT = path.join(process.cwd(), "docs and photos");
 const IMG_EXT = new Set([".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG"]);
@@ -28,23 +29,43 @@ function listImages(dir: string, baseDir: string): string[] {
   return out;
 }
 
-export async function GET() {
+function parsePagination(request: NextRequest) {
+  const offset = Math.max(0, Number(request.nextUrl.searchParams.get("offset") ?? 0) || 0);
+  const limitParam = request.nextUrl.searchParams.get("limit");
+  const limit = limitParam
+    ? Math.min(Math.max(1, Number(limitParam) || 24), 100)
+    : undefined;
+  return { offset, limit };
+}
+
+export async function GET(request: NextRequest) {
   try {
-    // Prefer cached Supabase Storage list (fast for both public and admin)
+    const { offset, limit } = parsePagination(request);
+
     const storageImages = await getCachedGalleryList();
     if (storageImages?.length) {
-      const res = NextResponse.json({ images: storageImages });
-      res.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+      const payload = limit
+        ? paginateGalleryImages(storageImages, offset, limit)
+        : { images: storageImages, total: storageImages.length, hasMore: false };
+
+      const res = NextResponse.json(payload);
+      res.headers.set("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
       return res;
     }
-    // Fallback: local "docs and photos" (e.g. dev)
-    const paths = listImages(GALLERY_ROOT, GALLERY_ROOT);
-    const images = paths.map((p, i) => ({
+
+    const paths = listImages(GALLERY_ROOT, GALLERY_ROOT).sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: "base" })
+    );
+    const all = paths.map((p, i) => ({
       id: String(i + 1),
       path: p,
       alt: "Prefect Summit 2025",
     }));
-    return NextResponse.json({ images });
+    const payload = limit
+      ? paginateGalleryImages(all, offset, limit)
+      : { images: all, total: all.length, hasMore: false };
+
+    return NextResponse.json(payload);
   } catch (err) {
     console.error("Gallery list error:", err);
     return NextResponse.json(

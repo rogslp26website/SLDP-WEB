@@ -1,16 +1,23 @@
-import { createServiceClient } from "@/lib/supabase/server";
-import { listFromStorage } from "@/lib/gallery-source";
+import { getCachedGalleryList } from "@/lib/gallery-cache";
+import { paginateGalleryImages } from "@/lib/gallery-source";
 import GalleryGrid from "@/components/GalleryGrid";
 import GalleryPageClient from "./GalleryPageClient";
 import { PageHero } from "@/components/PageSection";
 import Reveal from "@/components/motion/Reveal";
 import BrandMotif from "@/components/BrandMotif";
 
-export const dynamic = "force-dynamic";
+/** ISR: serve cached manifest; Storage is only hit when cache revalidates. */
+export const revalidate = 300;
+
+const INITIAL_PAGE_SIZE = 24;
 
 export default async function GalleryPage() {
-  const images = await listFromStorage(() => Promise.resolve(createServiceClient()));
-  const list = images ?? [];
+  const allImages = (await getCachedGalleryList()) ?? [];
+  const { images: initialImages, total, hasMore } = paginateGalleryImages(
+    allImages,
+    0,
+    INITIAL_PAGE_SIZE
+  );
 
   return (
     <div>
@@ -24,8 +31,13 @@ export default async function GalleryPage() {
         <BrandMotif />
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
           <Reveal>
-            {list.length > 0 ? (
-              <GalleryGrid images={list} />
+            {total > 0 ? (
+              <GalleryGrid
+                initialImages={initialImages}
+                total={total}
+                initialHasMore={hasMore}
+                pageSize={INITIAL_PAGE_SIZE}
+              />
             ) : (
               <GalleryPageClient />
             )}
