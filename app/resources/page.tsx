@@ -12,7 +12,8 @@ export default function ResourcesPage() {
           Programme materials and documents available for download.
         </p>
       </PageHero>
-      <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 bg-brand-motif">
+      <section className="w-full bg-brand-motif">
+        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {resources.map((item, i) => (
             <Reveal key={item.id} delay={(i % 6) * 0.06}>
@@ -20,7 +21,8 @@ export default function ResourcesPage() {
             </Reveal>
           ))}
         </div>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
