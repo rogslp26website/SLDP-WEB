@@ -62,7 +62,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 bg-surface-textured min-h-[60vh]">
+    <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 bg-white min-h-[60vh]">
       <Reveal>
         <h1 className="text-3xl font-bold text-teal-blue mb-2">Contact Us</h1>
         <p className="text-gray-600 mb-4">Interested in joining RoG SLDP?</p>

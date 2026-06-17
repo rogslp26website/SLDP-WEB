@@ -18,7 +18,7 @@ function ContentPanel({
 }) {
   return (
     <div
-      className={`rounded-2xl bg-teal-blue-dark/92 backdrop-blur-sm border border-white/15 shadow-xl px-6 py-8 md:px-10 md:py-10 ${className}`}
+      className={`rounded-2xl bg-teal-blue-dark border border-white/20 shadow-2xl px-6 py-8 md:px-10 md:py-10 ${className}`}
     >
       {children}
     </div>
@@ -38,7 +38,7 @@ export default function HomeAboutSection() {
           sizes="100vw"
           priority={false}
         />
-        <div className="absolute inset-0 bg-black/40" aria-hidden />
+        <div className="absolute inset-0 bg-black/50" aria-hidden />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <Reveal>
@@ -46,7 +46,7 @@ export default function HomeAboutSection() {
               <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center">
                 {homeIntroTitle}
               </h2>
-              <p className="text-lg text-white/95 leading-relaxed text-center max-w-3xl mx-auto">
+              <p className="text-lg text-white leading-relaxed text-center max-w-3xl mx-auto">
                 {homeIntro}
               </p>
             </ContentPanel>
@@ -66,7 +66,7 @@ export default function HomeAboutSection() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/45" aria-hidden />
+        <div className="absolute inset-0 bg-black/55" aria-hidden />
 
         <div className="relative z-10 max-w-4xl mx-auto space-y-8">
           <Reveal>
@@ -74,7 +74,7 @@ export default function HomeAboutSection() {
               <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center">
                 Expected Outcomes for Students
               </h2>
-              <ul className="list-disc list-inside space-y-2 text-white/95 leading-relaxed">
+              <ul className="list-disc list-inside space-y-2 text-white leading-relaxed">
                 {expectedOutcomes.map((outcome, i) => (
                   <li key={i}>{outcome}</li>
                 ))}

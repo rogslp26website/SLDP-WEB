@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Montserrat } from "next/font/google";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { heroSlides } from "@/lib/heroCarousel";
 import { heroTitle } from "@/lib/homeContent";
 import MotionButton from "@/components/motion/MotionButton";
 
@@ -16,41 +15,7 @@ const montserrat = Montserrat({
 });
 
 const ROTATING = ["Leaders", "Servants", "Changemakers", "Visionaries"];
-
-function HeroImageCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    if (heroSlides.length === 0) return;
-    const slide = heroSlides[currentIndex];
-    const timer = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroSlides.length);
-    }, slide.durationMs);
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
-
-  return (
-    <>
-      {heroSlides.map((s, i) => (
-        <div
-          key={s.src}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out kenburns ${
-            i === currentIndex ? "opacity-100 z-0" : "opacity-0 z-0"
-          }`}
-        >
-          <Image
-            src={s.src}
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority={i === 0}
-          />
-        </div>
-      ))}
-    </>
-  );
-}
+const HERO_POSTER = "/hero/primary.jpg";
 
 export default function HeroVideo() {
   const [videoFailed, setVideoFailed] = useState(false);
@@ -65,24 +30,29 @@ export default function HeroVideo() {
     return () => clearInterval(interval);
   }, [prefersReducedMotion]);
 
-  const showVideo = !videoFailed && !prefersReducedMotion;
-
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {showVideo ? (
+      {!videoFailed ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src="/hero.mp4"
-          poster={heroSlides[0]?.src ?? "/hero/primary.jpg"}
+          poster={HERO_POSTER}
           muted
           autoPlay
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           onError={() => setVideoFailed(true)}
         />
       ) : (
-        <HeroImageCarousel />
+        <Image
+          src={HERO_POSTER}
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
       )}
 
       <div className="absolute inset-0 bg-black/55 z-[1]" aria-hidden />
