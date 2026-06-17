@@ -25,6 +25,18 @@ html {
     background-size: 22px 22px, 18px 18px, 100% 100%;
     background-position: 0 0, 11px 11px, 0 0;
   }
+
+  .bg-brand-motif {
+    background-color: #ffffff;
+    background-image:
+      radial-gradient(rgba(66, 136, 154, 0.07) 1px, transparent 1.4px),
+      radial-gradient(rgba(118, 188, 67, 0.06) 1px, transparent 1.4px),
+      radial-gradient(circle at 0% 0%, rgba(66, 136, 154, 0.06), transparent 38%),
+      radial-gradient(circle at 100% 25%, rgba(118, 188, 67, 0.05), transparent 32%),
+      radial-gradient(circle at 80% 90%, rgba(66, 136, 154, 0.05), transparent 34%);
+    background-size: 28px 28px, 28px 28px, 100% 100%, 100% 100%, 100% 100%;
+    background-position: 0 0, 14px 14px, 0 0, 0 0, 0 0;
+  }
 }
 
 @layer base {
