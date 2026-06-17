@@ -41,7 +41,7 @@ export default function AboutPage() {
         </ul>
       </PageSection>
 
-      <PageSection className="bg-white" delay={0.05}>
+      <PageSection className="bg-surface-textured" delay={0.05}>
         <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-8">
           The SALT Framework (Core Pillars)
         </h2>
@@ -69,7 +69,7 @@ export default function AboutPage() {
         </ul>
       </PageSection>
 
-      <PageSection className="bg-white" delay={0.05}>
+      <PageSection className="bg-surface-textured" delay={0.05}>
         <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-8">
           Programme Components
         </h2>
@@ -99,7 +99,7 @@ export default function AboutPage() {
         </ul>
       </PageSection>
 
-      <section className="py-16 px-6 bg-white">
+      <section className="py-16 px-6 bg-surface-textured">
         <div className="max-w-4xl mx-auto text-center">
           <Reveal>
             <Link

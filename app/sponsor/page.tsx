@@ -129,7 +129,7 @@ export default function SponsorPage() {
         </div>
       </PageHero>
 
-      <PageSection className="bg-white">
+      <PageSection className="bg-surface-textured">
         <p className="text-gray-700 text-lg leading-relaxed">
           Your support helps us equip high school prefects with value-driven leadership skills so they can positively influence their schools and society through summits, the SALT track, and ongoing mentorship.
         </p>
@@ -162,7 +162,7 @@ export default function SponsorPage() {
         </div>
       </PageSection>
 
-      <PageSection className="bg-white" delay={0.1}>
+      <PageSection className="bg-surface-textured" delay={0.1}>
         <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-8">
           Benefits of Supporting
         </h2>
@@ -216,7 +216,7 @@ export default function SponsorPage() {
         </div>
       </PageSection>
 
-      <PageSection className="bg-white" delay={0.1}>
+      <PageSection className="bg-surface-textured" delay={0.1}>
         <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-4">
           What Your Support Enables
         </h2>

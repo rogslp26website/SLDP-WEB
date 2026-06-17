@@ -63,7 +63,7 @@ export default function OurTeamPage() {
         </div>
       </PageSection>
 
-      <section className="py-16 px-6 bg-white">
+      <section className="py-16 px-6 bg-surface-textured">
         <div className="max-w-4xl mx-auto text-center">
           <Reveal>
             <a
