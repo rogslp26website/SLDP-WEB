@@ -1,3 +1,6 @@
+import { PageHero, PageSection } from "@/components/PageSection";
+import Reveal from "@/components/motion/Reveal";
+
 const EXPLAINER =
   "The River of God Student Leadership Development Program (ROGSLDP) is stewarded by a multidisciplinary team of pastors, educators, professionals, and volunteers united by a shared calling to raise values-driven student leaders.";
 
@@ -18,29 +21,19 @@ const TEAM = [
 export default function OurTeamPage() {
   return (
     <div>
-      {/* Hero-style header – matches About */}
-      <section className="bg-teal-blue-dark text-white py-16 md:py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Meet the ROGSLDP Team
-          </h1>
-          <p className="text-lg text-white/90">
-            {EXPLAINER}
-          </p>
-        </div>
-      </section>
+      <PageHero>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          Meet the ROGSLDP Team
+        </h1>
+        <p className="text-lg text-white/90">{EXPLAINER}</p>
+      </PageHero>
 
-      {/* Team in prose – matches About sections */}
-      <section className="py-16 md:py-20 px-6 bg-teal-blue/5">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-12">
-            {TEAM.map((member, i) => (
-              <article
-                key={i}
-                className="border-l-4 border-lime-green pl-5 py-2 bg-white rounded-r-lg shadow-sm overflow-hidden"
-              >
+      <PageSection className="bg-teal-blue/5">
+        <div className="space-y-12">
+          {TEAM.map((member, i) => (
+            <Reveal key={i} delay={(i % 4) * 0.08}>
+              <article className="border-l-4 border-lime-green pl-5 py-2 bg-white rounded-r-lg shadow-sm overflow-hidden">
                 <div className="flex flex-col sm:flex-row gap-6">
-                  {/* Photo placeholder – room for picture */}
                   <div className="shrink-0">
                     <div
                       className="w-32 h-32 sm:w-40 sm:h-40 rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 flex items-center justify-center text-gray-400 text-sm text-center"
@@ -65,20 +58,21 @@ export default function OurTeamPage() {
                   </div>
                 </div>
               </article>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
-      </section>
+      </PageSection>
 
-      {/* CTA – matches About */}
-      <section className="py-12 px-6 bg-white">
+      <section className="py-16 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <a
-            href="/"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold bg-lime-green text-white hover:opacity-90 transition-all duration-300"
-          >
-            Back to Home
-          </a>
+          <Reveal>
+            <a
+              href="/"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold bg-lime-green text-white hover:opacity-90 transition-all duration-300 hover:-translate-y-0.5"
+            >
+              Back to Home
+            </a>
+          </Reveal>
         </div>
       </section>
     </div>

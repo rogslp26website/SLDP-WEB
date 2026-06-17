@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SessionProvider from "@/components/SessionProvider";
+import MainWithOffset from "@/components/MainWithOffset";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <SessionProvider>
           <Navbar />
-          <main className="min-h-screen">{children}</main>
+          <MainWithOffset>{children}</MainWithOffset>
           <Footer />
         </SessionProvider>
       </body>

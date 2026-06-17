@@ -2,26 +2,28 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export interface GalleryImageItem {
   id: string;
   path: string;
   alt: string;
-  url?: string; // when from Supabase Storage, use this for src (no resize param)
+  url?: string;
 }
 
 const PAGE_SIZE = 24;
-const THUMB_WIDTH = 400; // smaller thumbnails for faster load; API resizes Storage images too
+const THUMB_WIDTH = 400;
 
 function imageSrc(item: GalleryImageItem, thumb = false): string {
   const base = `/api/gallery/image?path=${encodeURIComponent(item.path)}`;
   if (thumb) return `${base}&w=${THUMB_WIDTH}`;
-  return item.url ?? base; // full size: use Storage URL when available to avoid proxy
+  return item.url ?? base;
 }
 
 export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) {
   const [shownCount, setShownCount] = useState(PAGE_SIZE);
   const [lightboxPath, setLightboxPath] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const visible = images.slice(0, shownCount);
   const hasMore = shownCount < images.length;
@@ -34,15 +36,26 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
     );
   }
 
+  const lightboxItem = lightboxPath
+    ? images.find((i) => i.path === lightboxPath)
+    : null;
+  const lightboxSrc = lightboxItem
+    ? imageSrc(lightboxItem, false)
+    : lightboxPath
+      ? `/api/gallery/image?path=${encodeURIComponent(lightboxPath)}`
+      : "";
+
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
         {visible.map((img) => (
-          <button
+          <motion.button
             key={img.id + img.path}
             type="button"
             onClick={() => setLightboxPath(img.path)}
-            className="relative aspect-square overflow-hidden rounded-lg border border-gray-200 hover:border-teal-blue/50 transition-colors focus:ring-2 focus:ring-lime-green focus:ring-offset-2"
+            className="relative aspect-square overflow-hidden rounded-lg border border-gray-200 hover:border-teal-blue/50 transition-colors focus:ring-2 focus:ring-lime-green focus:ring-offset-2 group"
+            whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
+            transition={{ duration: 0.2 }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -50,11 +63,11 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
               alt={img.alt}
               width={THUMB_WIDTH}
               height={THUMB_WIDTH}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
               decoding="async"
             />
-          </button>
+          </motion.button>
         ))}
       </div>
 
@@ -70,38 +83,45 @@ export default function GalleryGrid({ images }: { images: GalleryImageItem[] }) 
         </div>
       )}
 
-      {lightboxPath && (
-        <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightboxPath(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image lightbox"
-        >
-          <button
-            type="button"
+      <AnimatePresence>
+        {lightboxPath && (
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
             onClick={() => setLightboxPath(null)}
-            className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full z-10"
-            aria-label="Close"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image lightbox"
           >
-            <X size={28} />
-          </button>
-          <div
-            className="relative max-w-4xl w-full aspect-[3/2]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={(() => {
-              const item = images.find((i) => i.path === lightboxPath);
-              return item ? imageSrc(item, false) : `/api/gallery/image?path=${encodeURIComponent(lightboxPath)}`;
-            })()}
-              alt="Prefect Summit 2025"
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-      )}
+            <button
+              type="button"
+              onClick={() => setLightboxPath(null)}
+              className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full z-10"
+              aria-label="Close"
+            >
+              <X size={28} />
+            </button>
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
+              className="relative max-w-4xl w-full aspect-[3/2]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={lightboxSrc}
+                alt="Prefect Summit 2025"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

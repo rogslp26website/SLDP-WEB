@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .section-fullscreen {
+    @apply min-h-screen w-full flex flex-col justify-center;
+  }
+}
+
 @layer base {
   body {
     @apply font-sans antialiased;
@@ -10,5 +20,14 @@
   q,
   [class*="quote"] {
     @apply text-left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kenburns {
+    animation: none !important;
   }
 }

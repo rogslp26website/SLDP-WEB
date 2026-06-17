@@ -4,7 +4,7 @@ import { FileDown } from "lucide-react";
 
 export default function ResourceCard({ item }: { item: ResourceItem }) {
   return (
-    <article className="border border-gray-200 rounded-lg p-5 hover:border-teal-blue/50 transition bg-white shadow-sm">
+    <article className="border border-gray-200 rounded-lg p-5 hover:border-teal-blue/50 transition-all duration-300 bg-white shadow-sm hover:shadow-md hover:-translate-y-1">
       <h3 className="font-semibold text-teal-blue mb-2">{item.title}</h3>
       <p className="text-sm text-gray-600 mb-4">{item.description}</p>
       {item.fileUrl ? (
