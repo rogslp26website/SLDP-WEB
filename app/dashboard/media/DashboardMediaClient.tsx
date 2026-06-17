@@ -86,6 +86,7 @@ export default function DashboardMediaClient({ initialImages }: { initialImages:
                 className="relative group rounded-lg border border-gray-200 overflow-hidden bg-gray-100 aspect-square"
               >
                 {img.url ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={img.url}
                     alt={img.alt}

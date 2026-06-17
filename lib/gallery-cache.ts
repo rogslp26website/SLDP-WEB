@@ -11,7 +11,14 @@ const CACHE_TAG = "gallery-list";
 const REVALIDATE_SECONDS = 60;
 
 async function fetchGalleryList(): Promise<GalleryImageItem[] | null> {
-  return listFromStorage(() => Promise.resolve(createServiceClient()));
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return null;
+  }
+  try {
+    return listFromStorage(() => Promise.resolve(createServiceClient()));
+  } catch {
+    return null;
+  }
 }
 
 /** Cached gallery list (revalidates every 60s or when tag is revalidated). */
