@@ -19,7 +19,7 @@ export default async function GalleryPage() {
           Moments from the Prefect Summit and RoG SLDP programme.
         </p>
       </PageHero>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16 bg-surface-textured">
         <Reveal>
           {list.length > 0 ? (
             <GalleryGrid images={list} />

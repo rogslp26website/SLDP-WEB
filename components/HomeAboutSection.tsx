@@ -18,7 +18,7 @@ function ContentPanel({
 }) {
   return (
     <div
-      className={`rounded-2xl bg-teal-blue-dark border border-white/20 shadow-2xl px-6 py-8 md:px-10 md:py-10 ${className}`}
+      className={`rounded-2xl bg-teal-blue-dark/85 backdrop-blur-md border border-white/25 shadow-2xl px-6 py-8 md:px-10 md:py-10 ${className}`}
     >
       {children}
     </div>
@@ -43,10 +43,10 @@ export default function HomeAboutSection() {
         <div className="relative z-10 max-w-4xl mx-auto">
           <Reveal>
             <ContentPanel>
-              <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center drop-shadow-sm">
                 {homeIntroTitle}
               </h2>
-              <p className="text-lg text-white leading-relaxed text-center max-w-3xl mx-auto">
+              <p className="text-lg text-white leading-relaxed text-center max-w-3xl mx-auto drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 {homeIntro}
               </p>
             </ContentPanel>
@@ -71,10 +71,10 @@ export default function HomeAboutSection() {
         <div className="relative z-10 max-w-4xl mx-auto space-y-8">
           <Reveal>
             <ContentPanel>
-              <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-lime-green mb-6 text-center drop-shadow-sm">
                 Expected Outcomes for Students
               </h2>
-              <ul className="list-disc list-inside space-y-2 text-white leading-relaxed">
+              <ul className="list-disc list-inside space-y-2 text-white leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">
                 {expectedOutcomes.map((outcome, i) => (
                   <li key={i}>{outcome}</li>
                 ))}

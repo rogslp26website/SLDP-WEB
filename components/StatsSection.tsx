@@ -23,7 +23,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function StatsSection() {
   return (
-    <section className="section-fullscreen py-16 md:py-20 px-6 bg-white">
+    <section className="section-fullscreen py-16 md:py-20 px-6 bg-surface-textured">
       <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
         {stats.map((stat, index) => {
           const Icon = iconMap[stat.icon];
