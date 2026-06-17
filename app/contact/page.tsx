@@ -109,10 +109,10 @@ export default function ContactPage() {
           <div>
             <h2 className="font-semibold text-teal-blue mb-2">Email</h2>
             <a
-              href="mailto:info@rogsldp.com"
+              href="mailto:sldp@rogchurchkenya.org"
               className="text-lime-green hover:underline"
             >
-              info@rogsldp.com
+              sldp@rogchurchkenya.org
             </a>
           </div>
           <div>

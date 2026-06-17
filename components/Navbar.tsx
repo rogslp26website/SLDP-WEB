@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
@@ -154,11 +155,23 @@ export default function Navbar() {
           <div className="flex-1 min-w-0 flex items-center">
             <Link
               href="/"
-              className={`font-normal text-base hover:opacity-90 transition whitespace-nowrap ${
-                transparent ? "text-white" : "text-black"
-              }`}
+              className="flex items-center gap-2.5 hover:opacity-90 transition shrink-0"
             >
-              RoG SLDP
+              <Image
+                src="/logo.png"
+                alt="RoG SLDP logo"
+                width={40}
+                height={40}
+                className="h-9 w-9 object-contain"
+                priority
+              />
+              <span
+                className={`font-semibold text-base tracking-tight whitespace-nowrap ${
+                  transparent ? "text-white" : "text-black"
+                }`}
+              >
+                RoGSLDP
+              </span>
             </Link>
           </div>
 
@@ -236,7 +249,20 @@ export default function Navbar() {
             className="fixed inset-0 z-[60] bg-teal-blue flex flex-col md:hidden"
           >
             <div className="flex items-center justify-between h-14 px-4 border-b border-white/20">
-              <span className="text-white font-normal text-base">RoG SLDP</span>
+              <Link
+                href="/"
+                onClick={closeMobile}
+                className="flex items-center gap-2.5 text-white"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="RoG SLDP logo"
+                  width={36}
+                  height={36}
+                  className="h-8 w-8 object-contain"
+                />
+                <span className="font-semibold text-base tracking-tight">RoGSLDP</span>
+              </Link>
               <button
                 type="button"
                 onClick={closeMobile}

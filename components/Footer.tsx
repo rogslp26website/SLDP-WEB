@@ -34,10 +34,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-3">Contact</h3>
             <a
-              href="mailto:info@rogsldp.com"
+              href="mailto:sldp@rogchurchkenya.org"
               className="text-lime-green hover:underline font-medium block mb-4"
             >
-              info@rogsldp.com
+              sldp@rogchurchkenya.org
             </a>
             <h3 className="text-lg font-semibold mb-3">Related Links</h3>
             <a
