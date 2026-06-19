@@ -3,12 +3,12 @@ import {
   aboutVision,
   aboutMission,
   aboutWhy,
-  saltPillars,
   expectedOutcomes,
   programComponents,
   strategicExpansion,
 } from "@/lib/homeContent";
 import { PageHero, PageSection } from "@/components/PageSection";
+import SaltFlipCards from "@/components/SaltFlipCards";
 import Reveal from "@/components/motion/Reveal";
 import BrandMotif from "@/components/BrandMotif";
 
@@ -42,22 +42,7 @@ export default function AboutPage() {
         </ul>
       </PageSection>
 
-      <PageSection className="bg-brand-motif" delay={0.05}>
-        <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-8">
-          The SALT Framework (Core Pillars)
-        </h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {saltPillars.map((p) => (
-            <div
-              key={p.name}
-              className="border border-teal-blue/20 rounded-lg p-5 bg-teal-blue/5"
-            >
-              <h3 className="font-semibold text-lime-green mb-2">{p.name}</h3>
-              <p className="text-sm text-gray-700">{p.description}</p>
-            </div>
-          ))}
-        </div>
-      </PageSection>
+      <SaltFlipCards />
 
       <PageSection className="bg-teal-blue/5" delay={0.1}>
         <h2 className="text-2xl md:text-3xl font-bold text-teal-blue mb-6">
